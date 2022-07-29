@@ -184,6 +184,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<UserPageProps, Params> = async ({ params }) => {
   const userData = await getUserData(params!.id);
+  if (userData.jokes == undefined) {
+    userData.jokes = [];
+  }
   return {
     props: {
       data: userData,
