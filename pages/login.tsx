@@ -34,7 +34,7 @@ export default function Login({ providers, session }: LoginProps): ReactElement 
 
   return (
     <div className="h-screen bg-gray-100 flex flex-col">
-      <div className="mx-auto md:max-w-6xl flex flex-col md:flex-row h-full items-center space-y-16 md:space-x-6 pt-8 md:pt-0">
+      <div className="mx-auto md:max-w-6xl flex flex-col md:flex-row h-full items-center space-y-16 md:space-y-0 md:space-x-6 pt-8 md:pt-0">
         <div className="text-center mt-12 md:mt-0 md:text-left w-3/4 pl-4">
           <h1 className="font-bold text-3xl py-4">joke market.</h1>
           <p className="font-light">Collect the best jokes around the world.</p>
