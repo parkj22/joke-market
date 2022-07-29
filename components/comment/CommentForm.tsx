@@ -61,6 +61,7 @@ function CommentForm({ jokeId }: CommentFormProps): ReactElement | null {
             <Image
               className="rounded-full"
               src={session ? session.user.image : unauthenticatedUser}
+              alt="User Image"
               width="20"
               height="20"
               layout="fixed"

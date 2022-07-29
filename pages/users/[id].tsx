@@ -63,12 +63,12 @@ function UserPage({ data }: UserPageProps): ReactElement | null {
     setFollowingStatus(false);
     setFollowersCache(followersCache - 1);
   };
-  const isFollowing = async (): Promise<boolean> => {
+  const isFollowing = async (dataId: string): Promise<boolean> => {
     if (session) {
       const docRef = doc(db, "users", session.user.id);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        if (docSnap.data().following.includes(data.id)) {
+        if (docSnap.data().following.includes(dataId)) {
           return true;
         }
       }
@@ -77,10 +77,10 @@ function UserPage({ data }: UserPageProps): ReactElement | null {
   };
 
   useEffect(() => {
-    isFollowing().then((status) => {
+    isFollowing(data.id).then((status) => {
         setFollowingStatus(status);
     });
-  }, []);
+  }, [data.id]);
 
   return (
     <div className="flex flex-col mx-auto max-w-lg md:max-w-3xl pt-6 overflow-y-auto scrollbar-hide space-y-4">
@@ -88,6 +88,7 @@ function UserPage({ data }: UserPageProps): ReactElement | null {
         <Image
           className="rounded-full"
           src={data.image}
+          alt="User Image"
           height={144}
           width={144}
         />

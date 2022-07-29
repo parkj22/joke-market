@@ -82,6 +82,7 @@ const CommentSection = ({
                     <Image
                       className="rounded-full"
                       src={data.commenterImage}
+                      alt="Commenter Image"
                       width="25"
                       height="25"
                       layout="fixed"

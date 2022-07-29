@@ -39,18 +39,18 @@ function JokePage({ data }: JokePageProps): ReactElement | null {
   const [openPurchaseForm, setOpenPurchaseForm] = useState<boolean>(false);
   const [openResetValueForm, setOpenResetValueForm] = useState<boolean>(false);
 
-  const getOwnerData = async (): Promise<void> => {
-    const docSnap = await getDoc(doc(db, "users", data.owner));
+  const getOwnerData = async (dataOwner: string): Promise<void> => {
+    const docSnap = await getDoc(doc(db, "users", dataOwner));
     if (docSnap.exists()) {
       setOwnerData(docSnap.data() as UserData);
     } else {
-      console.error("Owner not found in user documents: " + data.owner);
+      console.error("Owner not found in user documents: " + dataOwner);
     }
   };
 
   useEffect(() => {
-    getOwnerData();
-  }, []);
+    getOwnerData(data.owner);
+  }, [data.owner]);
 
   return (
     <div className="flex-grow flex flex-col items-center overflow-y-auto scrollbar-hide">

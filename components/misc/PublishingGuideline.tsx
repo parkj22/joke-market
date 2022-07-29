@@ -11,7 +11,7 @@ function PublishingGuideline(): ReactElement | null {
         <li>1. Behave like you would in real life.</li>
         <li>2. While dark or offensive jokes are allowed, they must not incite violence of any kind.</li>
         <li>3. No reposts. Search for duplicates before publishing.</li>
-        <li>4. Don't spam or engage in spam-enabling activity of any kind.</li>
+        <li>4. Do not spam or engage in spam-enabling activity of any kind.</li>
         <li>5. Make us laugh!</li>
       </ol>
     </div>

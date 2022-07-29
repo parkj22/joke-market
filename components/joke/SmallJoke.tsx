@@ -46,7 +46,7 @@ function SmallJoke({ id, title, mainText, image, approveCount, value }: SmallJok
       )}
       {image && (
         <div className="relative overflow-hidden h-1/2 w-full z-0">
-          <Image src={image} objectFit="cover" layout="fill"/>
+          <Image src={image} alt="Joke Image" objectFit="cover" layout="fill"/>
         </div>
       )}
     </div>

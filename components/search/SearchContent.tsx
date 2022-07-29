@@ -199,7 +199,7 @@ function SearchContent({
         <div className="flex flex-col justify-center items-center h-[28rem]">
           <QuestionMarkCircleIcon className="text-red-200 h-60 w-60 md:h-72 md:w-72" />
           <span className="text-xl font-light text-gray-400 mb-4">
-            we couldn't find any results for '{currentQuery}'.
+            we could not find any results for "{currentQuery}".
           </span>
           <span className="font-lg font-light text-gray-400">
             • double-check your spelling.

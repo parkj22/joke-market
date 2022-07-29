@@ -59,6 +59,7 @@ export default function Header(): ReactElement | null {
           <Image
             className="rounded-full"
             src={session ? session.user.image : unauthenticatedUser}
+            alt="User Image"
             width="30"
             height="30"
             layout="fixed"

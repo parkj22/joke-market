@@ -9,11 +9,11 @@ import { GetServerSideProps } from "next";
 import { Session } from "next-auth";
 
 export default function Search({ session }: { session: Session | null }) {
+  const [searchBy, setSearchBy] = useState<string>("all");
+
   if (!session) {
     return <LoginRedirect />;
   }
-
-  const [searchBy, setSearchBy] = useState<string>("all");
 
   return (
     <div className="flex-grow min-h-screen pt-6 overflow-y-auto scrollbar-hide">

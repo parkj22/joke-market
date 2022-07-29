@@ -132,6 +132,7 @@ function JokeForm(): ReactElement | null {
             <Image
               className="rounded-full"
               src={session ? session.user.image : unauthenticatedUser}
+              alt="User Image"
               width="20"
               height="20"
               layout="fixed"
@@ -249,7 +250,7 @@ function JokeForm(): ReactElement | null {
                   onClick={removeImage}
                   className="h-32 flex flex-col filter hover:brightness-110 transition duration-150 transform hover:scale-105 cursor-pointer"
                 >
-                  <img
+                  <Image
                     className="h-full object-contain"
                     src={image}
                     alt="Image Preview"

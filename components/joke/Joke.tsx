@@ -78,7 +78,7 @@ function Joke({
       setApproved(approvers.includes(session.user.id));
       setApprovalUpToDate(true);
     }
-  }, []);
+  }, [approvers]);
 
   return (
     <div className="flex bg-white min-h-[20rem] shadow-md border border-gray-300 mb-4 max-w-md md:max-w-lg">
@@ -128,6 +128,7 @@ function Joke({
                 <Image
                   className="rounded-full"
                   src={ownerData.image}
+                  alt="Owner Image"
                   width="25"
                   height="25"
                   layout="fixed"
@@ -163,7 +164,7 @@ function Joke({
         </div>
         {image && (
           <div className="relative h-56 md:h-96 overflow-hidden">
-            <Image src={image} objectFit="cover" layout="fill" />
+            <Image src={image} alt="Joke Image" objectFit="cover" layout="fill" />
           </div>
         )}
       </div>
