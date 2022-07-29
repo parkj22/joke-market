@@ -34,13 +34,13 @@ export default function Login({ providers, session }: LoginProps): ReactElement 
 
   return (
     <div className="h-screen bg-gray-100 flex flex-col">
-      <div className="mx-auto md:max-w-6xl flex flex-col md:flex-row h-full items-center space-y-6 md:space-x-6">
+      <div className="mx-auto md:max-w-6xl flex flex-col md:flex-row h-full items-center space-y-16 md:space-x-6 pt-8 md:pt-0">
         <div className="text-center mt-12 md:mt-0 md:text-left w-3/4 pl-4">
           <h1 className="font-bold text-3xl py-4">joke market.</h1>
-          <p>Collect the best jokes around the world.</p>
+          <p className="font-light">Collect the best jokes around the world.</p>
         </div>
         <div className="flex flex-col bg-white rounded-xl shadow-lg w-96 md:w-[32rem] items-center pb-4">
-          <h2 className="p-4 font-bold">Social login</h2>
+          <h2 className="p-4 font-light text-lg md:text-xl">Social login</h2>
           {Object.values(providers ?? "").map((provider) => (
             <div
               key={provider.name}
