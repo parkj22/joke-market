@@ -63,7 +63,7 @@ export default function Login({ providers, session }: LoginProps): ReactElement 
                 />
               )}
               <div className="w-full grid items-center">
-                <span className="text-center">
+                <span className="text-center font-light">
                   Continue with {provider.name}
                 </span>
               </div>
