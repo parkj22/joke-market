@@ -39,7 +39,7 @@ export default function Login({ providers, session }: LoginProps): ReactElement 
           <h1 className="font-bold text-3xl py-4">joke market.</h1>
           <p className="font-light">Collect the best jokes around the world.</p>
         </div>
-        <div className="flex flex-col bg-white rounded-xl shadow-lg w-96 md:w-[32rem] items-center pb-4">
+        <div className="flex flex-col bg-white shadow-lg w-96 md:w-[32rem] items-center pb-4">
           <h2 className="p-4 font-light text-lg md:text-xl">Social login</h2>
           {Object.values(providers ?? "").map((provider) => (
             <div
