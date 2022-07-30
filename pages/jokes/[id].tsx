@@ -60,9 +60,9 @@ function JokePage({ data }: JokePageProps): ReactElement | null {
         <Modal>
           <PurchaseForm
             setOpenPurchaseForm={setOpenPurchaseForm}
-            jokeId={data.id}
-            jokeTitle={data.title}
-            jokeValue={data.value}
+            jokeId={data?.id}
+            jokeTitle={data?.title}
+            jokeValue={data?.value}
             jokeOwnerId={ownerData?.id}
             jokeOwnerName={ownerData?.name}
           />
@@ -72,38 +72,38 @@ function JokePage({ data }: JokePageProps): ReactElement | null {
         <Modal>
           <ResetValueForm
             setOpenResetValueForm={setOpenResetValueForm}
-            jokeId={data.id}
-            jokeValue={data.value}
+            jokeId={data?.id}
+            jokeValue={data?.value}
           />
         </Modal>
       )}
       <div className="w-full flex flex-col max-w-lg md:max-w-3xl items-center pt-6">
         <div className="w-full">
           <LargeJoke
-            id={data.id}
-            title={data.title}
-            mainText={data.mainText}
-            punchline={data.punchline}
-            image={data.image}
+            id={data?.id}
+            title={data?.title}
+            mainText={data?.mainText}
+            punchline={data?.punchline}
+            image={data?.image}
             owner={ownerData}
             ownerId={data?.owner}
-            approveCount={data.approveCount}
-            approvers={data.approvers}
-            timestamp={data.timestamp}
+            approveCount={data?.approveCount}
+            approvers={data?.approvers}
+            timestamp={data?.timestamp}
           />
         </div>
         <div className="w-full">
           <JokeDesc
             owner={ownerData}
-            value={data.value}
+            value={data?.value}
             setOpenPurchaseForm={setOpenPurchaseForm}
             setOpenResetValueForm={setOpenResetValueForm}
           />
         </div>
       </div>
       <div className="w-full max-w-lg md:max-w-3xl space-y-4 mb-8">
-        <CommentForm jokeId={data.id} />
-        <CommentSection jokeId={data.id} />
+        <CommentForm jokeId={data?.id} />
+        <CommentSection jokeId={data?.id} />
       </div>
     </div>
   );

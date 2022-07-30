@@ -32,7 +32,7 @@ function UserPage({ data }: UserPageProps): ReactElement | null {
   const [followersCache, setFollowersCache] = useState<number>(0);
 
   const handleFollow = async (): Promise<void> => {
-    if (session) {
+    if (session && data) {
       try {
         await updateDoc(doc(db, "users", session.user.id), {
           following: arrayUnion(data.id),
@@ -48,7 +48,7 @@ function UserPage({ data }: UserPageProps): ReactElement | null {
     setFollowersCache(followersCache + 1);
   };
   const handleUnfollow = async (): Promise<void> => {
-    if (session) {
+    if (session && data) {
       try {
         await updateDoc(doc(db, "users", session.user.id), {
           following: arrayRemove(data.id),
@@ -79,30 +79,27 @@ function UserPage({ data }: UserPageProps): ReactElement | null {
   useEffect(() => {
     if (data) {
       setFollowersCache(data.followers.length);
+      isFollowing(data.id).then((status) => {
+        setFollowingStatus(status);
+      });
     }
   }, []);
-
-  useEffect(() => {
-    isFollowing(data.id).then((status) => {
-        setFollowingStatus(status);
-    });
-  }, [data.id]);
 
   return (
     <div className="flex flex-col mx-auto max-w-lg md:max-w-3xl pt-6 overflow-y-auto scrollbar-hide space-y-4">
       <div className="my-6 md:mx-16 md:my-12 flex flex-col md:flex-row items-center md:justify-between space-y-4 md:space-y-0">
         <Image
           className="rounded-full"
-          src={data.image}
+          src={data?.image}
           alt="User Image"
           height={144}
           width={144}
         />
         <div className="flex flex-col items-center space-y-4">
-          <span className="font-light text-3xl">{data.name}</span>
+          <span className="font-light text-3xl">{data?.name}</span>
           <div className="grid grid-cols-3 gap-4">
             <div className="flex flex-col justify-end md:flex-row md:space-x-1 items-center">
-              <span className="font-semibold text-lg">{data.jokes.length}</span>
+              <span className="font-semibold text-lg">{data?.jokes.length}</span>
               <span className="font-light">jokes</span>
             </div>
             <div className="flex flex-col md:flex-row md:space-x-1 items-center">
@@ -111,14 +108,14 @@ function UserPage({ data }: UserPageProps): ReactElement | null {
             </div>
             <div className="flex flex-col md:flex-row md:space-x-1 items-center">
               <span className="font-semibold text-lg">
-                {data.following.length}
+                {data?.following.length}
               </span>
               <span className="font-light">following</span>
             </div>
           </div>
         </div>
         <div>
-          {session?.user.id == data.id ? (
+          {session?.user.id == data?.id ? (
             <div className="p-4 flex items-center border border-yellow-300 bg-yellow-50 space-x-1 hover:bg-yellow-100 active:bg-yellow-200 hover-effect">
               <CurrencyDollarIcon
                 className="text-yellow-400"
@@ -126,7 +123,7 @@ function UserPage({ data }: UserPageProps): ReactElement | null {
                 width={30}
               />
               <span className="text-lg font-semibold text-yellow-900 text-center">
-                {data.coins}
+                {data?.coins}
               </span>
             </div>
           ) : (
@@ -169,7 +166,7 @@ function UserPage({ data }: UserPageProps): ReactElement | null {
         <span className="font-light text-lg">collection.</span>
       </div>
       <div className="min-h-screen w-full">
-        <JokesFromUser jokeIds={data.jokes} userId={data.id} />
+        <JokesFromUser jokeIds={data?.jokes} userId={data?.id} />
       </div>
     </div>
   );
