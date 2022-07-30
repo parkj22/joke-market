@@ -49,8 +49,10 @@ function JokePage({ data }: JokePageProps): ReactElement | null {
   };
 
   useEffect(() => {
-    getOwnerData(data.owner);
-  }, [data.owner]);
+    if (data) {
+      getOwnerData(data.owner);
+    }
+  }, []);
 
   return (
     <div className="flex-grow flex flex-col items-center overflow-y-auto scrollbar-hide">
@@ -84,7 +86,7 @@ function JokePage({ data }: JokePageProps): ReactElement | null {
             punchline={data.punchline}
             image={data.image}
             owner={ownerData}
-            ownerId={data.owner}
+            ownerId={data?.owner}
             approveCount={data.approveCount}
             approvers={data.approvers}
             timestamp={data.timestamp}

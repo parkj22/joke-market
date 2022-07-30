@@ -29,7 +29,7 @@ interface Params extends ParsedUrlQuery {
 function UserPage({ data }: UserPageProps): ReactElement | null {
   const { data: session } = useSession();
   const [followingStatus, setFollowingStatus] = useState<boolean>(false);
-  const [followersCache, setFollowersCache] = useState<number>(data.followers.length);
+  const [followersCache, setFollowersCache] = useState<number>(0);
 
   const handleFollow = async (): Promise<void> => {
     if (session) {
@@ -75,6 +75,12 @@ function UserPage({ data }: UserPageProps): ReactElement | null {
     }
     return false;
   };
+
+  useEffect(() => {
+    if (data) {
+      setFollowersCache(data.followers.length);
+    }
+  }, []);
 
   useEffect(() => {
     isFollowing(data.id).then((status) => {
@@ -194,7 +200,9 @@ export const getStaticProps: GetStaticProps<UserPageProps, Params> = async ({ pa
   }
   return {
     props: {
-      data: userData,
+      data: {
+        ...userData,
+      },
     },
   };
 };
