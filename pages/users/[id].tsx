@@ -186,6 +186,12 @@ export const getStaticProps: GetStaticProps<UserPageProps, Params> = async ({ pa
   if (userData.jokes == undefined) {
     userData.jokes = [];
   }
+  if (userData.followers == undefined) {
+    userData.followers = [];
+  }
+  if (userData.following == undefined) {
+    userData.following = [];
+  }
   return {
     props: {
       data: userData,

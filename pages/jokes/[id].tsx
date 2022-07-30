@@ -130,6 +130,9 @@ export const getStaticProps: GetStaticProps<JokePageProps, Params> = async ({
   if (jokeData.comments == undefined) {
     jokeData.comments = [];
   }
+  if (jokeData.owner == undefined) {
+    jokeData.owner = "";
+  }
   return {
     props: {
       data: {
