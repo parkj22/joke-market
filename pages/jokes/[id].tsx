@@ -115,7 +115,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getAllJokesIds();
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 
