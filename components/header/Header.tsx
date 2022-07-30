@@ -21,7 +21,9 @@ export default function Header(): ReactElement | null {
     router.push("/");
   };
 
-  const getUserCoins = async (userId: string | undefined): Promise<number | null> => {
+  const getUserCoins = async (
+    userId: string | undefined
+  ): Promise<number | null> => {
     if (!userId) {
       return null;
     }
@@ -32,13 +34,16 @@ export default function Header(): ReactElement | null {
       return userDocSnap.data().coins;
     }
     return null;
-  }
+  };
 
   useEffect(() => {
     if (!dropdownActive) return;
     const disableDropdown = (e: Event): void => {
       const { target } = e;
-      if (dropdownRef.current && !dropdownRef.current.contains(target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(target as Node)
+      ) {
         setDropdownActive(false);
       }
     };
@@ -94,12 +99,15 @@ export default function Header(): ReactElement | null {
               <div className="py-1">
                 <Link href={`/users/${session?.user.id}`}>
                   <p className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 active:bg-gray-200 hover-effect cursor-pointer">
-                    Signed in as <b>{session ? session.user.name : "unauthenticated user"}</b>
+                    Signed in as{" "}
+                    <b>
+                      {session ? session.user.name : "unauthenticated user"}
+                    </b>
                   </p>
                 </Link>
                 <div className="text-gray-700 px-4 py-2 text-sm hover:bg-gray-100 active:bg-gray-200 hover-effect cursor-pointer flex items-center ">
                   <span className="mr-1">Current balance: </span>
-                  <CurrencyDollarIcon className="text-yellow-400 h-5 w-5"/>
+                  <CurrencyDollarIcon className="text-yellow-400 h-5 w-5" />
                   <b>{userCoins ? userCoins : "0"}</b>
                 </div>
               </div>
@@ -109,9 +117,11 @@ export default function Header(): ReactElement | null {
                     Your profile
                   </a>
                 </Link>
-                <a className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 active:bg-gray-200 hover-effect cursor-pointer">
-                  Settings
-                </a>
+                <Link href="/settings">
+                  <a className="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 active:bg-gray-200 hover-effect cursor-pointer">
+                    Settings
+                  </a>
+                </Link>
               </div>
               <div className="py-1">
                 <a

@@ -6,7 +6,7 @@ import {
   PhotographIcon,
   PlusIcon,
 } from "@heroicons/react/solid";
-import React, { ReactElement, useRef, useState } from "react";
+import React, { Dispatch, ReactElement, SetStateAction, useRef, useState } from "react";
 import {
   addDoc,
   arrayUnion,
@@ -21,7 +21,11 @@ import { ref, getDownloadURL, uploadString } from "firebase/storage";
 import unauthenticatedUser from "../../public/unauthenticated-user.png";
 import Spinner from "../misc/Spinner";
 
-function JokeForm(): ReactElement | null {
+type JokeFormProps = {
+  setPublished: Dispatch<SetStateAction<boolean>>
+}
+
+function JokeForm({ setPublished }: JokeFormProps): ReactElement | null {
   const { data: session } = useSession();
   const [mainTextActive, setMainTextActive] = useState<boolean>(true);
   const [punchlineActive, setPunchlineActive] = useState<boolean>(false);
@@ -78,6 +82,7 @@ function JokeForm(): ReactElement | null {
           console.log("Document written with ID: ", document.id);
         });
         resetForm();
+        setPublished(true);
       } catch (e) {
         console.log("Error adding document: ", e);
       }
@@ -248,12 +253,13 @@ function JokeForm(): ReactElement | null {
               (image ? (
                 <div
                   onClick={removeImage}
-                  className="h-32 flex flex-col filter hover:brightness-110 transition duration-150 transform hover:scale-105 cursor-pointer"
+                  className="h-32 flex flex-col items-center filter hover:brightness-110 transition duration-150 transform hover:scale-105 cursor-pointer"
                 >
                   <Image
-                    className="h-full object-contain"
+                    className="object-contain"
                     src={image}
                     alt="Image Preview"
+                    layout="fill"
                   />
                   <p className="text-xs text-red-500 text-center">
                     click to remove
