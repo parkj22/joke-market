@@ -4,19 +4,35 @@ import SearchBar from "../search/SearchBar";
 import HeaderNav from "./HeaderNav";
 import unauthenticatedUser from "../../public/unauthenticated-user.png";
 import { useRouter } from "next/router";
-import { ChevronDownIcon } from "@heroicons/react/solid";
+import { ChevronDownIcon, CurrencyDollarIcon } from "@heroicons/react/solid";
 import { useState, useRef, useEffect, ReactElement, MouseEvent } from "react";
 import Link from "next/link";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 export default function Header(): ReactElement | null {
   const { data: session } = useSession();
   const router = useRouter();
   const [dropdownActive, setDropdownActive] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLInputElement>(null);
+  const [userCoins, setUserCoins] = useState<number | null>(null);
 
   const navToIndexPage = (): void => {
     router.push("/");
   };
+
+  const getUserCoins = async (userId: string | undefined): Promise<number | null> => {
+    if (!userId) {
+      return null;
+    }
+    const userDocRef = doc(db, "users", userId);
+    const userDocSnap = await getDoc(userDocRef);
+
+    if (userDocSnap.exists()) {
+      return userDocSnap.data().coins;
+    }
+    return null;
+  }
 
   useEffect(() => {
     if (!dropdownActive) return;
@@ -27,6 +43,10 @@ export default function Header(): ReactElement | null {
       }
     };
     window.addEventListener("mousedown", disableDropdown);
+
+    getUserCoins(session?.user.id).then((coins) => {
+      setUserCoins(coins);
+    });
     return () => window.removeEventListener("mousedown", disableDropdown);
   }, [dropdownActive]);
 
@@ -77,6 +97,11 @@ export default function Header(): ReactElement | null {
                     Signed in as <b>{session ? session.user.name : "unauthenticated user"}</b>
                   </p>
                 </Link>
+                <div className="text-gray-700 px-4 py-2 text-sm hover:bg-gray-100 active:bg-gray-200 hover-effect cursor-pointer flex items-center ">
+                  <span className="mr-1">Current balance: </span>
+                  <CurrencyDollarIcon className="text-yellow-400 h-5 w-5"/>
+                  <b>{userCoins ? userCoins : "0"}</b>
+                </div>
               </div>
               <div className="py-1">
                 <Link href={`/users/${session?.user.id}`}>

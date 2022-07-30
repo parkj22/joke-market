@@ -175,7 +175,6 @@ UserPage.getLayout = function getLayout(page: ReactNode) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getAllUsersIds();
-  console.log(paths);
   return {
     paths,
     fallback: false,

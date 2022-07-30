@@ -113,7 +113,6 @@ JokePage.getLayout = function getLayout(page: ReactNode) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getAllJokesIds();
-  console.log(paths);
   return {
     paths,
     fallback: false,
