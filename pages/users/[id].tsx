@@ -183,13 +183,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<UserPageProps, Params> = async ({ params }) => {
   const userData = await getUserData(params!.id);
-  if (userData.jokes == undefined) {
+  if (!userData.jokes) {
     userData.jokes = [];
   }
-  if (userData.followers == undefined) {
+  if (!userData.followers) {
     userData.followers = [];
   }
-  if (userData.following == undefined) {
+  if (!userData.following) {
     userData.following = [];
   }
   return {

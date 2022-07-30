@@ -124,14 +124,11 @@ export const getStaticProps: GetStaticProps<JokePageProps, Params> = async ({
 }) => {
   const jokeData = await getJokeData(params!.id);
   // undefined is not serializable
-  if (jokeData.image == undefined) {
+  if (!jokeData.image) {
     jokeData.image = null;
   }
-  if (jokeData.comments == undefined) {
+  if (!jokeData.comments) {
     jokeData.comments = [];
-  }
-  if (jokeData.owner == undefined) {
-    jokeData.owner = "";
   }
   return {
     props: {
